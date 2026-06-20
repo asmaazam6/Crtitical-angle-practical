@@ -28,24 +28,37 @@ public class LineDrawer : MonoBehaviour
     //}
     void Update()
     {
+        if (LabExperimentManager.Instance != null)
+        {
+            // Get the current step cleanly
+            var currentStep = LabExperimentManager.Instance.CurrentStep;
+
+            // ONLY allow drawing if we are in Step 2, Step 3, or Step 4
+            if (currentStep != LabExperimentManager.LabStep.TracePrism &&
+                currentStep != LabExperimentManager.LabStep.PlaceIncidentPins &&
+                currentStep != LabExperimentManager.LabStep.LookThroughPrism)
+            {
+                return; // Block drawing on Step 1 (Placement) or when Completed
+            }
+        }
         if (Input.GetMouseButtonDown(0))
         {
-            // 1. Cast a ray from the camera to see what we are clicking first
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                // 2. If we hit the ThumbPin or its children, DO NOT start drawing a line
-                if (hit.collider.gameObject.name.Contains("ThumbPin") || hit.collider.CompareTag("ThumbPin"))
+                // 2. If we hit the ThumbPin, its children, OR the Prism, DO NOT start drawing a line
+                if (hit.collider.gameObject.name.Contains("ThumbPin") ||
+                    hit.collider.CompareTag("ThumbPin") ||
+                    hit.collider.gameObject.name.Contains("Prism")) // <-- Added Prism exception here
                 {
-                    return; // Exit early, allowing ThumbPinDragger to take over
+                    return; // Exit early, allowing dragger scripts to handle the interaction
                 }
             }
 
             StartLine();
         }
 
-        // Only draw or finish lines if a line actually exists
         if (currentLine != null)
         {
             if (Input.GetMouseButton(0))
