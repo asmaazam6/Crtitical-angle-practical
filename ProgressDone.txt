@@ -1,0 +1,14 @@
+==================================================
+PROGRESS DONE REPORT
+==================================================
+ 
+1. MODULES STATUS
+- I was able to successfully draw on the board and I was able to successfully insert a thumbtack into a board at a certain length.
+- What could not be achieved / should be added:
+   I was not able to measure correctly the line that is drawn outside of my prism boundary because I was not able to make a correct measuring instrument and it was becoming very difficult to use the textures my teammates have made.
+- Discrepancies found / missing features:
+  
+ It would have been better if I had the geometry instruments with me like a D or a scale.
+
+2. PRACTICALS STATUS (Critical Angle Practical)
+-I was able to successfully find the critical angle of the glass prism using optical needles, but the things missing are that using correct measurements and straight lines to do these things.
